@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interface</title>
+    <link rel="stylesheet" href="styles/formulariostyle.css">
+</head>
+<body>
+    <nav>
+        <a href="#"></a>
+        <a href="index.html">INICIO</a>
+        <a href="#"></a>
+    </nav>
+    <div class="container">
+        <div class="image-container">
+            <img id="quiz-image" src="https://via.placeholder.com/400" alt="Question Image">
+        </div>
+        <h2 id="question-text">Question will appear here</h2>
+        <div class="options" id="options-container">
+            <!-- Options will be dynamically generated -->
+        </div>
+    </div>
+    <div class="navigation">
+        <button id="prev-button" onclick="prevQuestion()" disabled>Anterior</button>
+        <button id="next-button" onclick="nextQuestion()">Siguiente</button>
+    </div>
+
+    <div class="result-container" id="result-container">
+        <h2>Quiz Completed!</h2>
+        <p id="correct-answers">Correct Answers: 0</p>
+        <p id="incorrect-answers">Incorrect Answers: 0</p>
+    </div>
+
+    <script>
+    const quizData = [
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+1",
+            question: "¿Qué harías si observas que una persona violenta a su familia?",
+            options: [
+                "Aviso a las autoridades",
+                "Le digo a la esposa que lo perdone",
+                "Lo golpeo",
+                "No hago nada"
+            ],
+            correctAnswer: 0 // Respuesta correcta: Aviso a las autoridades
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+2",
+            question: "¿Consideras que un jefe de familia puede ejercer su autoridad mediante golpes?",
+            options: [
+                "Sí, solo de esa manera obtendrá respeto",
+                "A veces es necesario",
+                "Depende de cada familia",
+                "No, eso representa un tipo de violencia"
+            ],
+            correctAnswer: 3 // Respuesta correcta: No, eso representa un tipo de violencia
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+3",
+            question: "¿Qué harías si te enteras de que despidieron a una de tus compañeras por quedar embarazada?",
+            options: [
+                "Nada, se lo merece",
+                "Hago una denuncia anónima con las autoridades",
+                "Solo me quejo con mis compañeros",
+                "Nada, no quiero que me despidan"
+            ],
+            correctAnswer: 1 // Respuesta correcta: Hago una denuncia anónima con las autoridades
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+4",
+            question: "¿Sabías que en Tulancingo de Bravo existe una instancia que puede ayudarte en caso de sufrir violencia de género?",
+            options: [
+                "Sí, la conozco",
+                "No la conozco",
+                "Sí, pero no me interesa",
+                "No y no me interesa"
+            ],
+            correctAnswer: 0 // Respuesta correcta: Sí, la conozco
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+5",
+            question: "¿Qué harías si te enteras de que una familia manda a sus hijos a trabajar desde pequeños?",
+            options: [
+                "Nada, es su problema",
+                "Aviso a las autoridades pertinentes",
+                "Le platico a mi familia",
+                "Le digo a mis hijos que les voy a hacer eso si reprueban una materia"
+            ],
+            correctAnswer: 1 // Respuesta correcta: Aviso a las autoridades pertinentes
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+6",
+            question: "¿Qué haces si te enteras de que tu primo no pasa pensión alimenticia a su familia?",
+            options: [
+                "Aconsejo a su ex pareja de que acuda a las autoridades",
+                "Nada, yo se lo aconsejé",
+                "Hablo con él",
+                "Nada, es mi familia y lo apoyo"
+            ],
+            correctAnswer: 0 // Respuesta correcta: Aconsejo a su ex pareja de que acuda a las autoridades
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+7",
+            question: "¿Qué haces si tus compañeros se burlan de una persona de alguna comunidad indígena?",
+            options: [
+                "Nada, me da miedo que me digan algo",
+                "Me burlo con ellos",
+                "Grabo la situación",
+                "Pongo un alto a las burlas"
+            ],
+            correctAnswer: 3 // Respuesta correcta: Pongo un alto a las burlas
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+8",
+            question: "¿Qué haces si tus compañeros se burlan de una persona que tiene diferentes preferencias sexuales?",
+            options: [
+                "Nada, me da miedo que me digan algo",
+                "Me burlo con ellos",
+                "Grabo la situación",
+                "Pongo un alto a las burlas"
+            ],
+            correctAnswer: 3 // Respuesta correcta: Pongo un alto a las burlas
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+9",
+            question: "¿Qué haces si ves que en el parque está sucediendo un caso de bullying?",
+            options: [
+                "Nada, me doy la vuelta",
+                "Me acerco a golpear a los agresores",
+                "Grabo la situación",
+                "Trato de poner un alto a la situación o aviso a las autoridades"
+            ],
+            correctAnswer: 3 // Respuesta correcta: Trato de poner un alto a la situación o aviso a las autoridades
+        },
+        {
+            image: "https://via.placeholder.com/400?text=Pregunta+10",
+            question: "¿Has presenciado o vivido algún otro tipo de violencia?",
+            options: [
+                "Violencia sexual",
+                "Violencia psicológica",
+                "Violencia verbal",
+                "Ninguna de las anteriores"
+            ],
+            correctAnswer: null // No hay una única respuesta correcta
+        }
+    ];
+    
+        let currentQuestionIndex = 0;
+        let selectedOptions = new Array(quizData.length).fill(null); // Track selections
+        let correctCount = 0;
+        let incorrectCount = 0;
+    
+        function loadQuestion(index) {
+            const question = quizData[index];
+            document.getElementById("quiz-image").src = question.image;
+            document.getElementById("question-text").textContent = question.question;
+    
+            const optionsContainer = document.getElementById("options-container");
+            optionsContainer.innerHTML = "";
+            question.options.forEach((option, i) => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => selectOption(i, index);
+                if (selectedOptions[index] === i) {
+                    button.classList.add("selected");
+                }
+                optionsContainer.appendChild(button);
+            });
+    
+            document.getElementById("prev-button").disabled = index === 0;
+            document.getElementById("next-button").disabled = selectedOptions[index] === null;
+            document.getElementById("next-button").textContent = index === quizData.length - 1 ? "Obtener resultado final" : "Siguiente";
+        }
+    
+        function selectOption(index, questionIndex) {
+            selectedOptions[questionIndex] = index;
+            loadQuestion(questionIndex);
+            checkAnswer(questionIndex);
+        }
+    
+        function checkAnswer(index) {
+            const correctAnswer = quizData[index].correctAnswer;
+            const buttons = document.querySelectorAll('.options button');
+            buttons.forEach((button, i) => {
+                if (i === correctAnswer) {
+                    button.style.backgroundColor = '#4CAF50'; // Correct answer in green
+                } else if (i === selectedOptions[index] && i !== correctAnswer) {
+                    button.style.backgroundColor = '#F44336'; // Incorrect answer in red
+                }
+            });
+        }
+    
+        function nextQuestion() {
+            if (selectedOptions[currentQuestionIndex] === null) {
+                alert("Por favor selecciona una opción antes de continuar.");
+                return;
+            }
+    
+            if (selectedOptions[currentQuestionIndex] === quizData[currentQuestionIndex].correctAnswer) {
+                correctCount++;
+            } else {
+                incorrectCount++;
+            }
+    
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion(currentQuestionIndex);
+            } else {
+                showResults();
+            }
+        }
+    
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion(currentQuestionIndex);
+            }
+        }
+    
+        function showResults() {
+            // Guardamos las respuestas correctas e incorrectas en localStorage
+            localStorage.setItem("correctAnswers", correctCount);
+            localStorage.setItem("incorrectAnswers", incorrectCount);
+
+            // Redirigimos a la página de resultados
+            window.location.href = "resultados.html";
+        }
+    
+        loadQuestion(currentQuestionIndex);
+    </script>
+    
+</body>
+</html>

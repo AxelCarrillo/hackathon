@@ -1,0 +1,169 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Navbar Minimalista con Forma Redondeada */
+nav {
+    position: fixed; /* Fija la barra en la parte superior */
+    top: 15px; /* Agrega espacio para que no toque el borde superior */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta el centrado */
+    background: linear-gradient(90deg, #2C2A50, #3C3A6B); /* Degradado atractivo */
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: 'Arial', sans-serif;
+    font-size: 18px;
+    padding: 20px 50px;
+    border-radius: 30px; /* Forma redondeada */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Sombra elegante */
+    z-index: 1000;
+    width: 90%; /* Ajusta el ancho al 90% de la pantalla */
+    max-width: 800px; /* Limita el ancho máximo */
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 400;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 20px; /* Bordes más suaves */
+    transition: all 0.3s ease-in-out;
+}
+
+nav a img {
+    width: 35px; /* Tamaño del logo */
+    height: auto;
+    border-radius: 50%; /* Hace el logo circular */
+    transition: transform 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #FEF3F1; /* Efecto dorado */
+    background: rgba(255, 255, 255, 0.2);
+}
+
+nav a img:hover {
+    transform: scale(1.1);
+}
+
+/* Espaciado del contenido para que no quede oculto debajo del navbar */
+.container {
+    padding: 20px;
+    max-width: 700px;
+    margin: 100px auto 50px; /* Ajusta el margen superior para evitar que el contenido se superponga con la barra */
+    text-align: center;
+}
+
+.image-container img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.options {
+    margin: 20px 0;
+}
+
+.options button {
+    background-color: #C0C7C2;
+    border: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px 8px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.options button:hover {
+    background-color: #ccc;
+}
+
+.options button.selected {
+    background-color: #2C2A50;
+    color: white;
+}
+
+.navigation {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.navigation button {
+    background-color: #2C2A50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navigation button:hover {
+    background-color: #2C2A50;
+}
+
+.navigation button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.result-container {
+    display: none;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border: 2px solid #2C2A50;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 400px;
+    width: 100%;
+}
+
+.result-container h2 {
+    color: #2C2A50;
+}
+
+.result-container p {
+    font-size: 18px;
+}
+
+.result-button {
+    margin-top: 20px;
+    background-color: #2C2A50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.result-button:hover {
+    background-color: #3e3b6d;
+}
