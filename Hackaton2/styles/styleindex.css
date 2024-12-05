@@ -29,9 +29,9 @@ nav a {
 }
 
 nav a img {
-    width: 35px; /* Tamaño del logo */
+    width: 55px; /* Tamaño del logo */
     height: auto;
-    border-radius: 50%; /* Hace el logo circular */
+    border-radius: 10%; /* Hace el logo circular */
     transition: transform 0.3s ease-in-out;
 }
 
@@ -81,7 +81,7 @@ body {
     text-align: center;
 }
 .card img {
-    width: 150px; /* Establece un tamaño fijo para todas las imágenes */
+    width: 250px; /* Establece un tamaño fijo para todas las imágenes */
     height: 150px; /* Asegura que todas las imágenes tengan la misma altura */
     object-fit: cover; /* Mantiene la proporción sin distorsionar */
     border-radius: 8px;
