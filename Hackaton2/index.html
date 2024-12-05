@@ -17,8 +17,8 @@
 
     <div class="container">
         <div class="cards-container">
-            <!-- Card 1 -->
-            <div class="card">
+             <!-- Card 1 -->
+             <div class="card">
                 <img src="img/FMOPDH.jpg" alt="Image 1">
                 <h3>Instancia Municipal de las Mujeres en Tulancingo</h3>
                 <p>Ubicación: Colonia La Guadalupe Calle Tolteca S/Tulancingo</p>
@@ -91,13 +91,109 @@
             </div>
         </div>
     </div>
+
     <hr class="hrline">
     <h1 class="h1video">Videos</h1>
     <div class="card-container">
+        <div class="cardytt">  
         <a href="https://www.youtube.com/" class="card-button" target="_blank">YouTube</a>
+        </div>
+        <div class="cardytt">
         <a href="https://www.youtube.com/" class="card-button" target="_blank">YouTube</a>
+        </div>
+        <div class="cardytt">
         <a href="https://www.youtube.com/" class="card-button" target="_blank">YouTube</a>
+        </div>
     </div>    
 
+    <!-- Botón flotante para abrir el chatbot -->
+    <button class="chatbot-btn" onclick="toggleChatbox()">🤖</button>
+
+    <!-- Chatbox -->
+    <div class="chatbox" id="chatbox">
+        <div class="chatbox-header">
+            <h4>Chatbot</h4>
+        </div>
+        <div class="chatbox-body" id="chatbox-body">
+            <!-- Aquí se mostrarían los mensajes del chatbot -->
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje...">
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Función para abrir y cerrar el chatbox con animación
+        function toggleChatbox() {
+            var chatbox = document.getElementById("chatbox");
+            if (chatbox.classList.contains("show")) {
+                chatbox.classList.remove("show"); // Cierra el chat con animación
+            } else {
+                chatbox.classList.add("show"); // Abre el chat con animación
+            }
+        }
+
+        // Función para enviar mensaje en el chat
+        function sendMessage() {
+    var inputField = document.getElementById("chat-input");
+    var chatboxBody = document.getElementById("chatbox-body");
+    var message = inputField.value.trim();
+
+    if (message !== "") {
+        // Crear el mensaje del usuario
+        var userMessageElement = document.createElement("p");
+        userMessageElement.textContent = "Tú: " + message;
+        userMessageElement.classList.add("user-message");  
+        chatboxBody.appendChild(userMessageElement);
+
+        inputField.value = "";  // Limpiar el campo de entrada
+
+        // Simular una respuesta del chatbot mientras esperamos la consulta
+        var chatbotResponseElement = document.createElement("p");
+        chatbotResponseElement.textContent = "🤖 Estoy procesando tu mensaje...";  
+        chatbotResponseElement.classList.add("chatbot-message");  
+        chatboxBody.appendChild(chatbotResponseElement);
+
+        // Desplazar hacia abajo para mostrar el nuevo mensaje
+        chatboxBody.scrollTop = chatboxBody.scrollHeight;
+
+        // Realizar la consulta dinámica a la API usando el mensaje del usuario
+        var apiUrl = "https://api-rest-groq.onrender.com/ia/" + encodeURIComponent(message);
+        console.log('URL de la API:', apiUrl); // Verificar la URL generada
+
+        fetch(apiUrl)
+            .then(response => {
+                console.log('Respuesta completa de la API:', response); // Verifica la respuesta de la API
+
+                if (!response.ok) {
+                    throw new Error("Error en la respuesta de la API: " + response.status);
+                }
+
+                return response.json();  // Intentar convertir a JSON
+            })
+            .then(data => {
+                console.log('Datos recibidos de la API:', data); // Verifica los datos recibidos
+
+                if (data && data.message) {
+                    var responseMessage = data.message;
+                    chatbotResponseElement.textContent = "🤖 " + responseMessage;
+                } else {
+                    chatbotResponseElement.textContent = "🤖 No recibí una respuesta válida.";
+                }
+
+                chatboxBody.appendChild(chatbotResponseElement);
+                chatboxBody.scrollTop = chatboxBody.scrollHeight;
+            })
+            .catch(error => {
+                console.error('Error al obtener la información:', error); // Ver error en consola
+                chatbotResponseElement.textContent = "🤖 Ocurrió un error al obtener la información.";
+                chatboxBody.appendChild(chatbotResponseElement);
+                chatboxBody.scrollTop = chatboxBody.scrollHeight;
+            });
+    }
+}
+
+    </script>
 </body>
 </html>

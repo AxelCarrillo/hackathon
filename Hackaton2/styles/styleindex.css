@@ -166,3 +166,170 @@ body {
     background-color: #990000; /* Rojo más oscuro */
     transform: translateY(2px); /* Efecto de presión al hacer clic */
 }
+        /* Estilo para el botón flotante */
+        .chatbot-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #2C2A50;
+            color: white;
+            border: none;
+            padding: 25px 28px;
+            border-radius: 35%;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            animation: bounce 0.5s infinite alternate;
+        }
+
+        /* Efecto de rebote para el botón */
+        @keyframes bounce {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Hace el botón un poco más grande */
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .chatbot-btn:hover {
+            background-color: #353361;
+        }
+
+  /* Estilo para el botón flotante */
+  .chatbot-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #2C2A50;
+    color: white;
+    border: none;
+    padding: 25px 28px;
+    border-radius: 35%;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: bounce 0.5s infinite alternate;
+}
+
+/* Efecto de rebote para el botón */
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1); /* Hace el botón un poco más grande */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.chatbot-btn:hover {
+    background-color: #353361;
+}
+
+/* Estilos para el chat */
+.chatbox {
+    display: none;
+    position: fixed;
+    bottom: 100px; /* Ajustado para que no tape el botón */
+    right: 20px;
+    width: 280px; /* Menor ancho para un diseño más minimalista */
+    height: 500px; /* Menor altura */
+    background-color: #FEFDF3;
+    border-radius: 12px; /* Bordes más redondeados */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.8); /* Sombra sutil */
+    padding: 15px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    opacity: 0; /* Invisible por defecto */
+    transform: translateY(20px); /* Empuja el chat hacia abajo */
+    transition: transform 0.3s ease, opacity 0.3s ease; /* Transición suave */
+}
+
+/* Mostrar chat con animación */
+.chatbox.show {
+    display: block;
+    opacity: 1; /* Lo hace visible */
+    transform: translateY(0); /* Lo mueve a su posición original */
+}
+
+/* Cabecera del chat */
+.chatbox-header {
+    background-color: #2C2A50;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Cuerpo del chat */
+.chatbox-body {
+    background-color: #ffffff;
+    height: 320px;  /* Aumento la altura del cuerpo del chat */
+    overflow-y: auto;
+    margin: 10px 0;
+    padding-right: 5px;
+    font-size: 14px;
+    padding-bottom: 50px; /* Deja espacio para los elementos de entrada y botón */
+}
+
+/* Pie de chat */
+.chatbox-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    position: absolute; /* Alineación fija al fondo del chat */
+    bottom: 10px; /* Distancia desde el fondo */
+    left: 0;
+    right: 0;
+    padding: 0 15px;
+}
+
+/* Estilo de la caja de entrada */
+.chatbox-footer input {
+    width: 75%; /* Más espacio para el input */
+    padding: 8px;
+    border-radius: 20px; /* Bordes redondeados */
+    border: 1px solid #2C2A50;
+    font-size: 14px;
+}
+
+/* Estilo del botón de enviar */
+.chatbox-footer button {
+    background-color: #2C2A50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px; /* Bordes redondeados */
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.chatbox-footer button:hover {
+    background-color: #2C2A56;
+}
+
+
+.user-message {
+    color: #0066cc;  /* Color para el mensaje del usuario */
+    font-weight: bold;
+    text-align: right; /* Alineación a la derecha */
+}
+
+.chatbot-message {
+    color: #2C2A50;  /* Color para el mensaje del chatbot */
+    text-align: left; /* Alineación a la izquierda */
+}
+.cardytt {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
